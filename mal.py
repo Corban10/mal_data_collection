@@ -66,24 +66,31 @@ api = Jikan()
 ## get list of rating + mal_id from each user
 ## ------------------------------------------------------------------------------
 
-search = pd.read_csv("users.csv")
-ratings = []
-ratings_list = []
+#search = pd.read_csv("users.csv")
+#ratings = []
+#ratings_list = []
+#
+#def get_ratings(y):
+#    try:
+#        ratings = api.user(username=y, request='animelist', argument='completed', page=1)
+#        for x in range(0, 200):
+#            ratings_list.append([y, ratings['anime'][x]['mal_id'], ratings['anime'][x]['score']])
+#    except:
+#        e = sys.exc_info()[0]
+#
+#for i in range(0, 600): #300
+#    get_ratings(search.iloc[i]['username'])
+#    time.sleep(2)
+#
+#ratings_df = pd.DataFrame(data=ratings_list, columns=['username', 'mal_id', 'score'])
+#ratings_df.to_csv("ratings.csv", encoding='utf-8', index=False)
 
-def get_ratings(y):
-    try:
-        ratings = api.user(username=y, request='animelist', argument='completed', page=1)
-        for x in range(0, 200):
-            ratings_list.append([y, ratings['anime'][x]['mal_id'], ratings['anime'][x]['score']])
-    except:
-        e = sys.exc_info()[0]
+## ------------------------------------------------------------------------------
+## remove ratings with 0 values
+## ------------------------------------------------------------------------------
 
-for i in range(0, 600): #300
-    get_ratings(search.iloc[i]['username'])
-    time.sleep(2)
-
-ratings_df = pd.DataFrame(data=ratings_list, columns=['username', 'mal_id', 'score'])
-ratings_df.to_csv("ratings.csv", encoding='utf-8', index=False)
+search = pd.read_csv("ratings.csv")
+print(search.head())
 
 ## ------------------------------------------------------------------------------
 ## get completed anime amount from user ?maybe?
