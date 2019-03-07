@@ -89,8 +89,11 @@ api = Jikan()
 ## remove ratings with 0 values
 ## ------------------------------------------------------------------------------
 
-search = pd.read_csv("ratings.csv")
-print(search.head())
+ratings_unclean = pd.read_csv("ratings.csv") 
+ratings_clean = ratings_unclean[ratings_unclean['score'] > 0]
+print(ratings_unclean.count())
+print(ratings_clean.count())
+ratings_clean.to_csv("ratings_valid.csv", encoding='utf-8', index=False)
 
 ## ------------------------------------------------------------------------------
 ## get completed anime amount from user ?maybe?
