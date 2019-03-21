@@ -10,25 +10,25 @@ api = Jikan()
 ## get most popular anime + club member amount
 ## ------------------------------------------------------------------------------
 
-#top_anime = []
-#top_anime_list = []
-#
-#def get_top_anime(y):
-#    try:
-#        top_anime = api.top(type = 'anime', page = y)
-#        for x in range(0, 50):
-#            top_anime_list.append([top_anime['top'][x]['mal_id'], top_anime['top'][x]['title'], top_anime['top'][x]['members']])
-#        time.sleep(2)
-#    except:
-#        e = sys.exc_info()[0]
-#
-#for y in range(1, 314):
-#    get_top_anime(y)
-#
-#top_anime_df = pd \
-#    .DataFrame(data=top_anime_list, columns=['mal_id', 'title', 'members']) \
-#    .sort_values(['mal_id'], ascending=True)
-#top_anime_df.to_csv("anime.csv", encoding='utf-8', index=False)
+top_anime = []
+top_anime_list = []
+
+def get_top_anime(y):
+    try:
+        top_anime = api.top(type = 'anime', page = y)
+        for x in range(0, 50):
+            top_anime_list.append([top_anime['top'][x]['mal_id'], top_anime['top'][x]['title'], top_anime['top'][x]['members']])
+        time.sleep(2)
+    except:
+        e = sys.exc_info()[0]
+
+for y in range(1, 314):
+    get_top_anime(y)
+
+top_anime_df = pd \
+    .DataFrame(data=top_anime_list, columns=['mal_id', 'title', 'members']) \
+    .sort_values(['mal_id'], ascending=True)
+top_anime_df.to_csv("anime.csv", encoding='utf-8', index=False)
 
 ## ------------------------------------------------------------------------------
 ##filter out clubs with less than 35 members
@@ -39,7 +39,7 @@ api = Jikan()
 
 ## ------------------------------------------------------------------------------
 ## get users from the clubs of most popular anime
-## get 10 members from each club OR get 35 members from top 300 clubs
+## get 10 members from each club OR get 35 members from top n clubs
 ## ------------------------------------------------------------------------------
 
 #search = pd.read_csv("anime_valid.csv")
@@ -89,14 +89,19 @@ api = Jikan()
 ## remove ratings with 0 values
 ## ------------------------------------------------------------------------------
 
-ratings_unclean = pd.read_csv("ratings.csv") 
-ratings_clean = ratings_unclean[ratings_unclean['score'] > 0]
-print(ratings_unclean.count())
-print(ratings_clean.count())
-ratings_clean.to_csv("ratings_valid.csv", encoding='utf-8', index=False)
+# ratings_unclean = pd.read_csv("ratings.csv") 
+# ratings_clean = ratings_unclean[ratings_unclean['score'] > 0]
+# print(ratings_unclean.count())
+# print(ratings_clean.count())
+# ratings_clean.to_csv("ratings_valid.csv", encoding='utf-8', index=False)
+
+
+
+
+
 
 ## ------------------------------------------------------------------------------
-## get completed anime amount from user ?maybe?
+## get completed anime amount from user ?maybe? nox
 ## ------------------------------------------------------------------------------
 
 #user = []
